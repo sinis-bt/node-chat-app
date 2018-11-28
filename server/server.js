@@ -14,10 +14,19 @@ app.use(expres.static(publicPath));
 io.on('connection', (socket) => {
     console.log("new user connected");
 
+    socket.emit('newMessage', {
+        from: 'sinisa',
+        text: 'some teht here',
+        createdAt: 1234
+    });
+
+    socket.on('createMessage', (message)=>{
+        console.log('createMesage', message);
+    });   
+
     socket.on('disconnect', () => {
         console.log('disconected from sever');
     });
-
 
 });
 
